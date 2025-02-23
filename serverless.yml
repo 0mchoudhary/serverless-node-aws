@@ -1,18 +1,18 @@
-org: trainwithshubham
+org: omchoudhary
 app: aws-node-http-api-project
 service: aws-node-http-api-project
-frameworkVersion: '3'
+frameworkVersion: '4'
 
 provider:
   name: aws
-  runtime: nodejs14.x
+  runtime: nodejs20.x
   region: us-east-1
   iamRoleStatements:
     - Effect: Allow
       Action:
         - dynamodb:*
       Resource:
-        - arn:aws:dynamodb:us-east-1:626072240565:table/KaamKaro
+        - arn:aws:dynamodb:us-east-1:682033502698:table/KaamKaro
 
 functions:
   hello:
@@ -40,6 +40,12 @@ functions:
           path: /kaam/{id}
           method: put
 
+  deleteKaam:
+    handler: src/deleteKaam.handler
+    events:
+      - httpApi:
+          path: /kaam/{id}
+          method: delete
 resources:
   Resources:
     KaamKaro:
